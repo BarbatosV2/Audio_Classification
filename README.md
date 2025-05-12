@@ -45,6 +45,11 @@ python train.py --batch 2 --workers 2 --device 0 --epoches 100 audio_data labele
 
 # Predicting 
 
+## WAV File Prediction
+```
+python predict.py --source ./audio_data/dog_5.wav --device 0 sound_model.pth
+```
+
 ## For Ordinary Prediction
 ```
 python predict.py --source 0 --device 0 sound_model.pth
