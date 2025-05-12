@@ -29,6 +29,12 @@ CSV labeling Example
 | cat_0.wav | cat |
 | dog_0.wav | dog |
 
+In VS Code
+
+filename, label
+cat_0.wav, cat
+dog_0.wav, dog
+
 # Traing
 
 ```
