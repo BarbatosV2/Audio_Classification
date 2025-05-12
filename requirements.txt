@@ -1,0 +1,7 @@
+torch
+torchaudio
+sounddevice
+soundfile
+keyboard
+numpy
+pandas
