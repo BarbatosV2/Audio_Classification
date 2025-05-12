@@ -1,4 +1,4 @@
-## Audio Classification
+# Audio Classification
 
 # Install Requirements
 ```
@@ -45,15 +45,15 @@ python train.py --batch 2 --workers 2 --device 0 --epoches 100 audio_data labele
 
 # Predicting 
 
-For Ordinary Prediction
+## For Ordinary Prediction
 ```
 python predict.py --source 0 --device 0 sound_model.pth
 ```
-For Null label Prediction
+## For Null label Prediction
 ```
 python predict.py --source 0 --device 0 --null_label "silence" sound_model.pth
 ```
-For Confidencial threshold Prediction
+## For Confidencial threshold Prediction
 ```
 python predict.py --source 0 --device 0 --confidence_threshold 0.8 --null_label "silence" sound_model.pth
 ```
