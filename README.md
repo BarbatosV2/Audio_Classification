@@ -42,10 +42,20 @@ dog_0.wav, dog
 python train.py --batch 2 --workers 2 --device 0 --epoches 100 audio_data labeled_data.csv
 ```
 
+
 # Predicting 
 
+For Ordinary Prediction
 ```
 python predict.py --source 0 --device 0 sound_model.pth
+```
+For Null label Prediction
+```
+python predict.py --source 0 --device 0 --null_label "silence" sound_model.pth
+```
+For Confidencial threshold Prediction
+```
+python predict.py --source 0 --device 0 --confidence_threshold 0.8 --null_label "silence" sound_model.pth
 ```
 
 And then it will save detect_1.txt and contonuous_rec_1.wav in recorded folder.
