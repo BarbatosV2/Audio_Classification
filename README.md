@@ -87,4 +87,13 @@ When predicting the model, if the accuracy is under 70%, it will show as null, o
 This accuracy value can be changed under predict.py
 Training with no_sound or natural sound will be fine as well. 
 
+P.S Make sure micrphone is ok for the better accuracy. 
+
+## hz_classifier.py
+
+This code is to chech the Hz rate frequency of wav file
+```
+python hz_classifier.py ./audio_data/cat_0.wav
+```
+
 Happy Coding
