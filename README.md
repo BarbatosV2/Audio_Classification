@@ -29,6 +29,14 @@ CSV labeling Example
 | cat_0.wav | cat |
 | dog_0.wav | dog |
 
+or 
+
+| filename | label |
+| --- | --- |
+| cat_0.wav | cat |
+| dog_0.wav | dog |
+| Null_0.wav | no_sound |
+
 In VS Code
 ```
 filename, label
