@@ -198,7 +198,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--source', type=str, default='0', help="Source for prediction (0 for microphone or file path for audio file)")
     parser.add_argument('--device', type=int, default=0, help="Device to run the model on (default: 0 for GPU if available, else CPU)")
-    parser.add_argument('--confidence_threshold', type=float, default=0.7, help="Minimum confidence for a detection to be considered valid.")
+    parser.add_argument('--confidence_threshold', type=float, default=0.8, help="Minimum confidence for a detection to be considered valid.")
     parser.add_argument('--null_label', type=str, default="null", help="Label to consider as 'null' or background.")
     parser.add_argument('model_path', type=str, help="Path to the trained model file (e.g., 'sound_model.pth')")
     args = parser.parse_args()
