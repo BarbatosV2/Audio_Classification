@@ -9,19 +9,25 @@ class AudioClassifier(nn.Module):
 
         self.conv = nn.Sequential(
             nn.Conv2d(1, 16, kernel_size=3, padding=1),
+            nn.BatchNorm2d(16),  # Added Batch Normalization
             nn.ReLU(),
             nn.MaxPool2d(2),
             nn.Conv2d(16, 32, kernel_size=3, padding=1),
+            nn.BatchNorm2d(32),  # Added Batch Normalization
             nn.ReLU(),
             nn.MaxPool2d(2),
         )
 
         self.pool = nn.AdaptiveAvgPool2d((14, 14))  # Ensure fixed output size
 
-        # You may need to change this input size
+        # The input size to the first Linear layer is determined by the output of 
+        # self.conv (32 channels) and self.pool (14x14 feature map).
+        # So, 32 * 14 * 14 = 6272.
         self.fc = nn.Sequential(
-            nn.Linear(32 * 14 * 14, 128),  # Adjust this size after debugging
+            nn.Dropout(0.5),  # Added Dropout for regularization
+            nn.Linear(32 * 14 * 14, 128),
             nn.ReLU(),
+            nn.Dropout(0.5),  # Added Dropout for regularization
             nn.Linear(128, num_classes)
         )
 

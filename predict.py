@@ -54,6 +54,14 @@ def predict_file(path, model, device, target_sr=TARGET_SAMPLE_RATE, fixed_length
             output = model(input_tensor)  # Forward pass
             prediction = torch.argmax(output, dim=1).item()  # Get the predicted class
             print(f"Predicted: {LABELS[prediction]}")
+
+            # Log the prediction to a text file
+            log_file = os.path.join("recorded", "wav_predict.txt") 
+            with open(log_file, "a") as f:
+                f.write(f"{os.path.basename(path)}, {LABELS[prediction]}\n")
+            print(f"Prediction logged to {log_file}")
+
+
     except Exception as e:
         print(f"Error processing file {path}: {e}")
 
@@ -147,6 +155,9 @@ def predict_mic(model, device, frame_duration=1.0, target_sr=TARGET_SAMPLE_RATE,
  
                     with torch.no_grad():
                         output = model(input_tensor)
+                        # --- DIAGNOSTIC PRINT ---
+                        # print(f"Raw logits: {output.cpu().numpy()}") # Temporarily uncomment to see raw scores
+                        # ------------------------
                         # Apply softmax to get probabilities
                         probabilities = torch.softmax(output, dim=1)
                         # Get the highest probability and its class index
@@ -178,7 +189,7 @@ def predict_mic(model, device, frame_duration=1.0, target_sr=TARGET_SAMPLE_RATE,
             # Concatenate all audio chunks
             continuous_audio = np.concatenate(all_audio_data_chunks, axis=0)
             # Save the continuous recording
-            continuous_audio_save_path = get_next_numbered_filename(log_dir, "continuous_rec", ".wav")
+            continuous_audio_save_path = get_next_numbered_filename(log_dir, "recording", ".wav")
             sf.write(continuous_audio_save_path, continuous_audio, target_sr)
             print(f"[INFO] Continuous audio saved to {continuous_audio_save_path}")
         
