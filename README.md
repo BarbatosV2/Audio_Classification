@@ -58,9 +58,10 @@ Cannot be label as null
 # Traing
 
 ```
-python train.py --batch 2 --workers 2 --device 0 --epoches 100 audio_data labeled_data.csv
+python train.py --batch 32 --workers 16 --device 0 --epoches 500 audio_data labeled_data.csv
 ```
 
+batch, workers and epoches are changable according to machine can handle. 
 
 # Predicting 
 
