@@ -240,7 +240,7 @@ def predict_http_stream(url, model, device, target_sr=TARGET_SAMPLE_RATE, fixed_
     - The audio is 16-bit signed integers (np.int16).
     - The sample rate of the stream matches `target_sr`.
     """
-    print(f"\n📡 Connecting to audio stream: {url} (Confidence threshold: {confidence_threshold:.2f})...")
+    print(f"\n Connecting to audio stream: {url} (Confidence threshold: {confidence_threshold:.2f})...")
     log_dir = "recorded"
     text_log_file_path = get_next_numbered_filename(log_dir, "stream_detect", ".txt")
     session_start_time = datetime.now()
@@ -328,7 +328,7 @@ async def predict_websocket_stream(url, model, device, target_sr=TARGET_SAMPLE_R
     Assumes the stream provides raw PCM mono audio, 16-bit signed integers,
     at the target_sr.
     """
-    print(f"\n📡 Connecting to WebSocket audio stream: {url} (Confidence threshold: {confidence_threshold:.2f})...")
+    print(f"\n Connecting to WebSocket audio stream: {url} (Confidence threshold: {confidence_threshold:.2f})...")
     log_dir = "recorded"
     text_log_file_path = get_next_numbered_filename(log_dir, "websocket_detect", ".txt")
     session_start_time = datetime.now()
