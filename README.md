@@ -92,7 +92,7 @@ P.S Make sure micrphone is ok for the better accuracy.
 
 ## hz_classifier.py
 
-This code is to chech the Hz rate frequency of wav file
+This code is to check the Hz rate frequency of wav file
 ```
 python hz_classifier.py ./audio_data/cat_0.wav
 ```
