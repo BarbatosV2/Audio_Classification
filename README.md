@@ -63,6 +63,24 @@ python train.py --batch 32 --workers 16 --device 0 --epoches 500 audio_data labe
 
 batch, workers and epoches are changable according to machine can handle. 
 
+## Source
+For build in Microphone or webcam
+```
+python predict.py --source 0 --device 0 sound_model.pth
+```
+For local wav file
+```
+python predict.py --source ./audio_data/cat_0.wav --device 0 sound_model.pth
+```
+For link 
+```
+python predict.py --source https://audio_link/audio.wav --device 0 sound_model.pth
+```
+For webserver
+```
+python predict.py --source stream:ws://172.20.10.2:82 --device 0 sound_model.pth
+```
+
 # Predicting 
 
 ## WAV File Prediction
@@ -89,6 +107,7 @@ This accuracy value can be changed under predict.py or by simplying changing --c
 Training with no_sound or natural sound will be fine as well. 
 
 P.S Make sure micrphone is ok for the better accuracy. 
+
 
 ## hz_classifier.py
 
