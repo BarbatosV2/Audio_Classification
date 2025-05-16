@@ -4,6 +4,12 @@
 ```
 pip install -r requirements.txt
 ```
+
+if the device python is 3.8 or lower, need to install websocket
+```
+pip install websockets
+```
+
 # Create a directory for the dataset
 ```
 mkdir -p audio_data
