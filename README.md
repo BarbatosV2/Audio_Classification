@@ -5,7 +5,7 @@
 pip install -r requirements.txt
 ```
 
-if the device python is 3.8 or lower, need to install websocket
+if the device python is 3.8 or older, need to install websocket
 ```
 pip install websockets
 ```
