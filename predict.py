@@ -144,7 +144,7 @@ def predict_mic(model, device, frame_duration=1.0, target_sr=TARGET_SAMPLE_RATE,
         device: torch.device (CPU/GPU).
         frame_duration: Duration of each prediction window in seconds.
     """
-    print(f"\n🎙️ Starting real-time audio classification (Confidence threshold: {confidence_threshold:.2f})...")
+    print(f"\n Starting real-time audio classification (Confidence threshold: {confidence_threshold:.2f})...")
     log_dir = "recorded"
     text_log_file_path = get_next_numbered_filename(log_dir, "detect", ".txt")
     session_start_time = datetime.now() # Record session start time
@@ -342,7 +342,7 @@ async def predict_websocket_stream(url, model, device, target_sr=TARGET_SAMPLE_R
 
     try:
         # Adjust connect_timeout and ping_interval/timeout as needed
-        async with websockets.connect(url, timeout=10, ping_interval=20, ping_timeout=20) as websocket:
+        async with websockets.connect(url, open_timeout=10, ping_interval=20, ping_timeout=20) as websocket:
             print(f"Successfully connected to WebSocket stream: {url}")
             async for message in websocket:
                 if not isinstance(message, bytes):
