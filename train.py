@@ -5,6 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from model import AudioClassifier
+from tqdm import tqdm # Added for progress bar
 from utils import AudioDataset, collate_fn, get_device
 
 def train(args):
@@ -27,7 +28,9 @@ def train(args):
         correct_total = 0
         total_samples = 0
 
-        for inputs, labels in dataloader:
+        # Wrap dataloader with tqdm for a progress bar
+        progress_bar = tqdm(dataloader, desc=f"Epoch {epoch + 1}/{args.epoches}", leave=False)
+        for inputs, labels in progress_bar:
             inputs, labels = inputs.to(device), labels.to(device)
 
             optimizer.zero_grad()
@@ -43,9 +46,12 @@ def train(args):
             correct_total += (predicted == labels).sum().item()
             total_samples += labels.size(0)
 
+            # Update progress bar description with current loss (optional)
+            # progress_bar.set_postfix(loss=loss.item())
+
         # Calculate epoch accuracy
         accuracy = 100 * correct_total / total_samples
-        print(f"Epoch {epoch + 1}/{args.epoches} | Loss: {running_loss:.4f} | Accuracy: {accuracy:.2f}%")
+        print(f"Epoch {epoch + 1}/{args.epoches} | Loss: {running_loss/len(dataloader):.4f} | Accuracy: {accuracy:.2f}%")
 
     # --- Modified model saving logic ---
     model_dir = 'model'
