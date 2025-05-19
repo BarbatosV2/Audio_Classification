@@ -63,6 +63,8 @@ Cannot be label as null
 
 # Traing
 
+In utils.py, LABELS = ['name', 'another', 'obj'] need to be edited before start training
+
 ```
 python train.py --batch 32 --workers 16 --device 0 --epoches 500 audio_data labeled_data.csv
 ```
