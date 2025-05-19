@@ -6,7 +6,7 @@ import torchaudio
 from torch.nn.utils.rnn import pad_sequence
 import torchaudio.transforms as T
 
-LABELS = ['cat', 'dog']  # Will be populated in dataset
+LABELS = ['cat', 'dog', 'no_sound']  # Will be populated in dataset
 
 def preprocess_audio(file_path, sample_rate=16000):
     waveform, sr = torchaudio.load(file_path, normalize=True)
@@ -58,7 +58,7 @@ class AudioDataset(Dataset):
 
 def collate_fn(batch):
     waveforms, labels = zip(*batch)
-    waveforms = [w.squeeze(0) for w in waveforms]  # remove unnecessary channel
+    waveforms = [w.squeeze(0) for w in waveforms] 
     waveforms = torch.stack(waveforms)  # [B, N]
     waveforms = waveforms.unsqueeze(1)  # [B, 1, N]
     labels = torch.tensor(labels)

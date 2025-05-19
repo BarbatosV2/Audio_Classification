@@ -24,7 +24,7 @@ class AudioClassifier(nn.Module):
         self.pool = nn.AdaptiveAvgPool2d((14, 14))  # Ensure fixed output size
 
         # The input size to the first Linear layer is determined by the output of 
-        # self.conv (now 64 channels) and self.pool (14x14 feature map).
+        # self.conv (now 64 channels) and self.pool (14x14 feature map). 
         # So, 64 * 14 * 14 = 12544.
         fc_input_features = 64 * 14 * 14
 
