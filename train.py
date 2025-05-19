@@ -1,5 +1,6 @@
 import argparse
 import torch
+import os # Added for path manipulation and directory creation
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -46,8 +47,21 @@ def train(args):
         accuracy = 100 * correct_total / total_samples
         print(f"Epoch {epoch + 1}/{args.epoches} | Loss: {running_loss:.4f} | Accuracy: {accuracy:.2f}%")
 
+    # --- Modified model saving logic ---
+    model_dir = 'model'
+    os.makedirs(model_dir, exist_ok=True) # Create model directory if it doesn't exist
+
+    base_model_name = 'sound_model'
+    model_extension = '.pth'
+    model_save_path = os.path.join(model_dir, f"{base_model_name}{model_extension}")
+    
+    counter = 1
+    while os.path.exists(model_save_path):
+        model_save_path = os.path.join(model_dir, f"{base_model_name}_{counter}{model_extension}")
+        counter += 1
+    # --- End of modified model saving logic ---
+
     # Save the model after training
-    model_save_path = 'sound_model.pth'
     torch.save({
         'model_state_dict': model.state_dict(),
         'label_to_idx': dataset.label_to_idx, # Save the label mapping
