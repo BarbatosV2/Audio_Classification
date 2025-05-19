@@ -1,6 +1,5 @@
 import torch.nn as nn
 import torchaudio.transforms as T
-import torch.nn.functional as F
 
 class AudioClassifier(nn.Module):
     def __init__(self, num_classes):
@@ -15,17 +14,23 @@ class AudioClassifier(nn.Module):
             nn.Conv2d(16, 32, kernel_size=3, padding=1),
             nn.BatchNorm2d(32),  # Added Batch Normalization
             nn.ReLU(),
-            nn.MaxPool2d(2),
+            nn.MaxPool2d(2), # Output: 32 channels, H/4, W/4
+            nn.Conv2d(32, 64, kernel_size=3, padding=1), # New conv block
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+            nn.MaxPool2d(2), # Output: 64 channels, H/8, W/8
         )
 
         self.pool = nn.AdaptiveAvgPool2d((14, 14))  # Ensure fixed output size
 
         # The input size to the first Linear layer is determined by the output of 
-        # self.conv (32 channels) and self.pool (14x14 feature map).
-        # So, 32 * 14 * 14 = 6272.
+        # self.conv (now 64 channels) and self.pool (14x14 feature map).
+        # So, 64 * 14 * 14 = 12544.
+        fc_input_features = 64 * 14 * 14
+
         self.fc = nn.Sequential(
             nn.Dropout(0.5),  # Added Dropout for regularization
-            nn.Linear(32 * 14 * 14, 128),
+            nn.Linear(fc_input_features, 128),
             nn.ReLU(),
             nn.Dropout(0.5),  # Added Dropout for regularization
             nn.Linear(128, num_classes)
