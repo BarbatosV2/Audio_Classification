@@ -144,7 +144,7 @@ def predict_mic(model, device, frame_duration=1.0, target_sr=TARGET_SAMPLE_RATE,
         device: torch.device (CPU/GPU).
         frame_duration: Duration of each prediction window in seconds.
     """
-    print(f"\n🎙️ Starting real-time audio classification (Confidence threshold: {confidence_threshold:.2f})...")
+    print(f"\n Starting real-time audio classification (Confidence threshold: {confidence_threshold:.2f})...")
     log_dir = "recorded"
     text_log_file_path = get_next_numbered_filename(log_dir, "detect", ".txt")
     session_start_time = datetime.now() # Record session start time
